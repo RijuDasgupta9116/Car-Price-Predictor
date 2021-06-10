@@ -1,2 +1,2 @@
 # Car-Price-Predictor
-Car Price Predictor from Car Dekho
+A regression model build by car dekho data set
