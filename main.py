@@ -2,7 +2,9 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import pickle
-# pipe = pickle.load(open('pipe.pkl','rb'))
+
+pipe = pickle.load(open('pipe.pkl','rb'))
+
 st.header('Car Price Predictor')
 
 # year
@@ -29,11 +31,9 @@ seats = st.number_input('Seats')
 brand = st.selectbox('Brand',('Maruti','Hyundai','Mahindra','Tata','Ford','Honda','Toyota','Renault','Chevrolet','Volkswagen'))
 
 if st.button('Predict Price'):
-    # form a numpy array of shape(1,11)
-    input = np.array([year,kms,fuel,seller,transmission,owner,mileage,engine,power,seats,brand])
-    input = pd.DataFrame(input,columns=['year', 'selling_price', 'km_driven', 'fuel', 'seller_type',
-       'transmission', 'owner', 'mileage', 'engine', 'max_power', 'seats',
-       'brand'])
-    # y_pred = pipe.predict(input)
-    # st.title('Rs '+ str(np.round(y_pred)))
-    st.title('Hello World!')
+    # form a numpy array(1,11)
+    input = np.array([[year, kms, fuel, seller, transmission, owner, mileage, engine, power, seats, brand]])
+    input = pd.DataFrame(input,columns=['year','km_driven','fuel','seller_type','transmission','owner','mileage','engine','max_power','seats','brand'])
+    #st.dataframe(input)
+    y_pred = pipe.predict(input)
+    st.title("Rs " + str(np.round(y_pred[0])))
